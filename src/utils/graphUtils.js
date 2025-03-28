@@ -45,3 +45,39 @@ export const convertToIncMatrix = ({nodes, edges}) => {
 
     return incMatrix;
 }
+
+export const getHierarchyLevels = ({nodes, edges}) => {
+    const HL = []; // Иерархические уровни
+    const usedV = new Set(); // Используем множество для быстрого поиска
+    let notUsedV = new Set(nodes); // Оставшиеся вершины
+
+    // Подсчитываем входящие рёбра для каждой вершины
+    const inDegree = new Map(nodes.map(node => [node, 0]));
+    for (const edge of edges) {
+        inDegree.set(edge.target, (inDegree.get(edge.target) || 0) + 1);
+    }
+
+    // Шаг 1: Формирование уровней
+    while (notUsedV.size > 0) {
+        const currentLevel = [];
+        for (const vertex of notUsedV) {
+            let k = inDegree.get(vertex);
+            for (const edge of edges) {
+                if (usedV.has(edge.source) && edge.target === vertex) {
+                    k--;
+                }
+            }
+            if (k === 0) currentLevel.push(vertex);
+        }
+
+        if (currentLevel.length === 0) break; // Защита от бесконечного цикла (циклы в графе)
+
+        HL.push({ level: currentLevel });
+        for (const vertex of currentLevel) {
+            usedV.add(vertex);
+            notUsedV.delete(vertex);
+        }
+    }
+
+    return HL;
+}

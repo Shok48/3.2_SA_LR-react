@@ -25,7 +25,7 @@ const IncidenceMatrix = ({ nodes, edges, title = 'Матрица инциден�
             dataIndex: `col${edgeIndex}`,
             key: `col${edgeIndex}`,
             render: (value) => (
-                <Tooltip title={value === -1 ? `Начало дуги: e${edge.source}` : value === 1 ? `Конец дуги: e${edge.target}` : ''}>
+                <Tooltip title={value === -1 ? `Начало дуги: e${edgeIndex + 1}` : value === 1 ? `Конец дуги: e${edgeIndex + 1}` : ''}>
                     <Tag color={value === -1 ? 'red' : value === 1 ? 'green' : 'default'}>{value}</Tag>
                 </Tooltip>
             )
