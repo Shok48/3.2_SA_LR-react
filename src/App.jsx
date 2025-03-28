@@ -1,7 +1,10 @@
 import styles from './App.module.css'
 import { Header } from 'antd/es/layout/layout'
 import { Link, BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { Page } from './pages/Page/Page'
+import Page from './pages/Page/Page'
+import HomePage from './pages/HomePage/HomePage'
+import ConverterPage from './pages/ConverterPage/ConverterPage'
+
 function App() {
 
   return (
@@ -13,8 +16,8 @@ function App() {
             <Link to="/LR-3" className={styles.link}>Подсистемы</Link>
         </Header>
         <Routes>
-            {/* <Route path="/" element={<Page title="Главная" />} />
-            <Route path="/LR-1" element={<Page title="Конвертер" />} /> */}
+            <Route path="/" element={<HomePage/>} />
+            <Route path="/LR-1" element={<ConverterPage/>} />
         </Routes>
     </Router>
   )

@@ -1,0 +1,10 @@
+.converterPage {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.converterButton {
+    align-self: flex-start;
+    width: 270px;
+}
