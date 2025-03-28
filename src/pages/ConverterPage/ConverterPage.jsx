@@ -4,7 +4,8 @@ import IncidenceInput from '../../components/InsidenceInput/IncidenceInput'
 import { Button } from 'antd'
 import { TransactionOutlined } from '@ant-design/icons'
 import { useState } from 'react'
-import { convertLefIncData } from '../../utils/graphUtils'
+import { convertLefIncData, convertToAdjMatrix } from '../../utils/graphUtils'
+import AdjacencyMatrix from '../../components/AdjacencyMatrix/AdjacencyMatrix'
 
 const ConverterPage = () => {
     const title = 'Конвертер левых инцидентов в матрицы смежности и инцидентности';
@@ -20,6 +21,8 @@ const ConverterPage = () => {
         const graphData = convertLefIncData(incData);
         setGraphData(graphData);
         console.log('Граф данных', graphData);
+        const adjMatrix = convertToAdjMatrix(graphData);
+        console.log('Матрица смежности', adjMatrix);
     }
 
     return (
@@ -32,6 +35,12 @@ const ConverterPage = () => {
                     icon={<TransactionOutlined />} 
                     onClick={convertData}
                 >Конвертировать</Button>
+                {graphData && (
+                    <AdjacencyMatrix 
+                        nodes={graphData.nodes} 
+                        edges={graphData.edges} 
+                    />
+                )}
             </div>
             
         </Page>
