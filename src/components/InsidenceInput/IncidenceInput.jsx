@@ -1,7 +1,7 @@
 import { Space, Button, Select, Modal } from 'antd';
 import { PlusOutlined, MinusOutlined, DeleteOutlined, ClearOutlined } from '@ant-design/icons';
 import styles from './IncidenceInput.module.css'
-import { useState, memo, useMemo, useCallback } from 'react';
+import { memo, useState, useMemo, useCallback, useEffect } from 'react';
 
 const InputSelector = memo(({ fieldId, inputId, value, fieldsKeys, onRemove, onChange }) => {
     const handleChange = useCallback((value) => {
@@ -66,8 +66,12 @@ const FieldManager = memo(({ fieldId, inputs, onAddInput, allFields, onRemoveFie
     )
 })
 
-const IncidenceInput = () => {
+const IncidenceInput = ({ onDataChange}) => {
     const [fields, setFields] = useState( { 1: [2, 3], 2: [1], 3: [] } );
+
+    useEffect(() => {
+        onDataChange?.(fields);
+    }, [fields, onDataChange]);
 
     const addField = useCallback(() => {
         const newFieldId = Object.keys(fields).length + 1;
