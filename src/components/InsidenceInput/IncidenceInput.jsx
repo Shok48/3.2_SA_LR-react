@@ -1,5 +1,5 @@
-import { Space, Button, Select, Modal } from 'antd';
-import { PlusOutlined, MinusOutlined, DeleteOutlined, ClearOutlined } from '@ant-design/icons';
+import { Space, Button, Select, Upload } from 'antd';
+import { PlusOutlined, MinusOutlined, DeleteOutlined, ClearOutlined, SaveOutlined, UploadOutlined } from '@ant-design/icons';
 import styles from './IncidenceInput.module.css'
 import { memo, useState, useMemo, useCallback, useEffect } from 'react';
 
@@ -118,6 +118,38 @@ const IncidenceInput = ({ onDataChange}) => {
         }));
     }, []);
 
+    const saveData = useCallback(() => {
+        if (Object.keys(fields).length === 0) {
+            console.error('Необходимо ввести данные');
+            alert('Необходимо ввести данные');
+            return;
+        }
+
+        const blob = new Blob([JSON.stringify(fields, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'incidence.json';
+        link.click();
+
+        URL.revokeObjectURL(url);
+    }, [fields]);
+
+    const handleUpload = useCallback((file) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            try {
+                const data = JSON.parse(e.target.result);
+                setFields(data);
+            } catch (error) {
+                console.error('Некорректный формат файла', error);
+            }
+        }
+
+        reader.readAsText(file);
+    }, []);
+
     const fieldEntries = useMemo(() => Object.entries(fields), [fields]);
     
     return (
@@ -140,8 +172,18 @@ const IncidenceInput = ({ onDataChange}) => {
                 }
             </div>
             <Space className={styles.actionContainer}>
-                <Button type="primary" icon={<PlusOutlined />} onClick={addField}>Добавить поле</Button>
-                <Button type="primary" icon={<ClearOutlined />} onClick={clearFields}>Очистить</Button>
+                <Button className={styles.actionButton} type="primary" icon={<PlusOutlined />} onClick={addField}>Добавить поле</Button>
+                <Button className={styles.actionButton} type="primary" icon={<ClearOutlined />} onClick={clearFields}>Очистить</Button>
+            </Space>
+            <Space className={styles.actionContainer}>
+                <Button className={styles.actionButton} type="primary" icon={<SaveOutlined />} onClick={saveData}>Сохранить</Button>
+                <Upload
+                    accept=".json"
+                    showUploadList={false}
+                    beforeUpload={handleUpload}
+                >
+                    <Button className={styles.actionButton} type="primary" icon={<UploadOutlined />}>Загрузить</Button>
+                </Upload>
             </Space>
         </div>
     )
