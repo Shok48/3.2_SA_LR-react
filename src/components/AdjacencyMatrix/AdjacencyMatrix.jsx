@@ -13,7 +13,7 @@ const AdjacencyMatrix = ({ nodes, edges, title = 'Матрица смежнос�
         key: `row-${rowIndex}`,
         vertex: headers[rowIndex],
         ...Object.fromEntries(row.map((value, colIndex) => [`col${colIndex}`, value])),
-    })), [matrix]);
+    })), [matrix, headers]);
     
     const columns = useMemo(() => [
         {
@@ -32,7 +32,7 @@ const AdjacencyMatrix = ({ nodes, edges, title = 'Матрица смежнос�
                 </Tooltip>
             )
         }))
-    ], [nodes, title]);
+    ], [headers, title]);
 
     return (
         <Table 
