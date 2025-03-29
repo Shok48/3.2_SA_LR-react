@@ -4,7 +4,7 @@ import { Link, BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Page from './pages/Page/Page'
 import HomePage from './pages/HomePage/HomePage'
 import ConverterPage from './pages/ConverterPage/ConverterPage'
-
+import HierarchyPage from './pages/HierarchyPage/HierarchyPage'
 function App() {
 
   return (
@@ -18,6 +18,7 @@ function App() {
         <Routes>
             <Route path="/" element={<HomePage/>} />
             <Route path="/LR-1" element={<ConverterPage/>} />
+            <Route path="/LR-2" element={<HierarchyPage/>} />
         </Routes>
     </Router>
   )

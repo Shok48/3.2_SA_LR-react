@@ -1,0 +1,11 @@
+.hierarchyPage {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px 0;
+}
+
+.hierarchyButton {
+    align-self: flex-start;
+    width: 270px;
+}
