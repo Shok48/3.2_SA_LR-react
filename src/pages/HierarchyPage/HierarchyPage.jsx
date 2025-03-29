@@ -1,6 +1,7 @@
 import Page from '../Page/Page';
 import styles from './HierarchyPage.module.css';
 import IncidenceInput from '../../components/InsidenceInput/IncidenceInput';
+import AdjacencyMatrix from '../../components/AdjacencyMatrix/AdjacencyMatrix'
 import { useState } from 'react';
 import { convertLefIncData, getHierarchyLevels } from '../../utils/graphUtils';
 import { Button } from 'antd';
@@ -68,6 +69,19 @@ const HierarchyPage = () => {
                     icon={<PlayCircleOutlined  />} 
                     onClick={handleHierarchy}
                 >Выделить иерархические уровни</Button>
+                {graphData && (
+                    <AdjacencyMatrix 
+                        nodes={graphData.nodes}
+                        edges={graphData.edges}
+                    />
+                )}
+                {hierarchyGraph && (
+                    <AdjacencyMatrix 
+                        nodes={hierarchyGraph.nodes}
+                        edges={hierarchyGraph.edges}
+                        headers={Array.from(mapping.entries()).map(([key, value]) => `V'${value} (V${key})`)}
+                    />
+                )}
             </div>
         </Page>
     );
