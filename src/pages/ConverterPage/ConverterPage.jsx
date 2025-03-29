@@ -2,7 +2,7 @@ import Page from '../Page/Page'
 import styles from './ConverterPage.module.css'
 import IncidenceInput from '../../components/InsidenceInput/IncidenceInput'
 import { Button } from 'antd'
-import { TransactionOutlined } from '@ant-design/icons'
+import { TransactionOutlined, PlayCircleOutlined  } from '@ant-design/icons'
 import { useState } from 'react'
 import { convertLefIncData, convertToAdjMatrix } from '../../utils/graphUtils'
 import AdjacencyMatrix from '../../components/AdjacencyMatrix/AdjacencyMatrix'
@@ -33,7 +33,7 @@ const ConverterPage = () => {
                 <Button 
                     className={styles.converterButton} 
                     type="primary" 
-                    icon={<TransactionOutlined />} 
+                    icon={<PlayCircleOutlined  />} 
                     onClick={convertData}
                 >Конвертировать</Button>
                 {graphData && (
