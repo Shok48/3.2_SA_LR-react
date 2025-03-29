@@ -5,12 +5,13 @@ import { useMemo } from 'react';
 import { convertToAdjMatrix } from '../../utils/graphUtils';
 
 
-const AdjacencyMatrix = ({ nodes, edges, title = 'Матрица смежности' }) => {
+const AdjacencyMatrix = ({ nodes, edges, title = 'Матрица смежности', headers = null }) => {
     const matrix = useMemo(() => convertToAdjMatrix({ nodes, edges }), [nodes, edges]);
+    headers = headers || nodes.map((_, index) => `V${index + 1}`);
 
     const dataSource = useMemo(() => matrix.map((row, rowIndex) => ({
         key: `row-${rowIndex}`,
-        vertex: `v${rowIndex + 1}`,
+        vertex: headers[rowIndex],
         ...Object.fromEntries(row.map((value, colIndex) => [`col${colIndex}`, value])),
     })), [matrix]);
     
@@ -21,12 +22,12 @@ const AdjacencyMatrix = ({ nodes, edges, title = 'Матрица смежнос�
             key: 'vertex',
             render: (text) => <Tag color='blue'>{text}</Tag>
         },
-        ...nodes.map((node, index) => ({
-            title: `v${index + 1}`,
+        ...headers.map((header, index) => ({
+            title: header,
             dataIndex: `col${index}`,
             key: `col${index}`,
             render: (value, record) => (
-                <Tooltip title={value === 1 ? `Дуга: ${record.vertex} → v${index + 1}` : ''}>
+                <Tooltip title={value === 1 ? `Дуга: ${record.vertex} → ${headers[index]}` : ''}>
                     <Tag color={value === 1 ? 'green' : 'default'}>{value}</Tag>
                 </Tooltip>
             )
