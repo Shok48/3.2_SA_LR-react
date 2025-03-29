@@ -34,7 +34,11 @@ const HierarchyPage = () => {
 
     const renumberGraph = (data, HL) => {
 <<<<<<< HEAD
+<<<<<<< HEAD
         const { _, edges } = data;
+=======
+        const { nodes, edges } = data;
+>>>>>>> 515364f348f6855a5da795543e94b3c2b48c5b99
 =======
         const { nodes, edges } = data;
 >>>>>>> 515364f348f6855a5da795543e94b3c2b48c5b99
