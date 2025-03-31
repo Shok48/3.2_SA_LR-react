@@ -1,0 +1,23 @@
+.subsistemsPage {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px 0;
+}
+
+.submitButton {
+    align-self: flex-start;
+    width: 270px;
+}
+
+.incidentItem {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.leftIncidentsContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+}

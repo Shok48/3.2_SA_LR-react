@@ -5,6 +5,9 @@ import Page from './pages/Page/Page'
 import HomePage from './pages/HomePage/HomePage'
 import ConverterPage from './pages/ConverterPage/ConverterPage'
 import HierarchyPage from './pages/HierarchyPage/HierarchyPage'
+import SubsistemsPage from './pages/SubsistemsPage/SubsistemsPage'
+import '@ant-design/v5-patch-for-react-19';
+
 function App() {
 
   return (
@@ -19,6 +22,7 @@ function App() {
             <Route path="/" element={<HomePage/>} />
             <Route path="/LR-1" element={<ConverterPage/>} />
             <Route path="/LR-2" element={<HierarchyPage/>} />
+            <Route path="/LR-3" element={<SubsistemsPage/>} />
         </Routes>
     </Router>
   )

@@ -7,7 +7,7 @@ import styles from './LeftIncidentsVisualizer.module.css';
 const { Title, Text } = Typography;
 const { Option } = Select;
 
-const LeftIncidentsVisualizer = ({ graph }) => {
+const   LeftIncidentsVisualizer = ({ graph }) => {
   const [selectedNode, setSelectedNode] = React.useState('all');
 
   const getLeftIncidents = (node) => {
@@ -43,7 +43,7 @@ const LeftIncidentsVisualizer = ({ graph }) => {
             record.incidents.map((incident, idx) => (
               <React.Fragment key={idx}>
                 <div className={styles.incidentItem}>
-                    <Tag color="blue">{incident.source}</Tag>
+                  <Tag color="blue">{incident.source}</Tag>
                   <Text style={{ margin: '0 4px' }}>→</Text>
                   <Tag color="green">{incident.target}</Tag>
                 </div>
