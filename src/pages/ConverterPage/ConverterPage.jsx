@@ -1,6 +1,6 @@
 import Page from '../Page/Page'
 import styles from './ConverterPage.module.css'
-import IncidenceInput from '../../components/InsidenceInput/IncidenceInput'
+import IncidenceInput from '../../components/InсidenceInput/IncidenceInput'
 import { Button } from 'antd'
 import { TransactionOutlined, PlayCircleOutlined  } from '@ant-design/icons'
 import { useState } from 'react'

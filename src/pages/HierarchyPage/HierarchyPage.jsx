@@ -1,6 +1,6 @@
 import Page from '../Page/Page';
 import styles from './HierarchyPage.module.css';
-import IncidenceInput from '../../components/InsidenceInput/IncidenceInput';
+import IncidenceInput from '../../components/InсidenceInput/IncidenceInput';
 import AdjacencyMatrix from '../../components/AdjacencyMatrix/AdjacencyMatrix'
 import { useState } from 'react';
 import { convertLefIncData, getHierarchyLevels } from '../../utils/graphUtils';

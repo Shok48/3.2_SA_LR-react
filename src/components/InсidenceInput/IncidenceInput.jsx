@@ -1,4 +1,4 @@
-import { Space, Button, Select, Upload } from 'antd';
+import { Space, Button, Select, Upload, Modal, message } from 'antd';
 import { PlusOutlined, MinusOutlined, DeleteOutlined, ClearOutlined, SaveOutlined, UploadOutlined } from '@ant-design/icons';
 import styles from './IncidenceInput.module.css'
 import { memo, useState, useMemo, useCallback, useEffect } from 'react';
@@ -30,7 +30,25 @@ const InputSelector = memo(({ fieldId, inputId, value, fieldsKeys, onRemove, onC
     );
 });
 
-const FieldManager = memo(({ fieldId, inputs, onAddInput, allFields, onRemoveField, onRemoveInput, onInputChange }) => {    
+const FieldManager = memo(({ fieldId, inputs, onAddInput, allFields, onRemoveField, onRemoveInput, onInputChange }) => {
+    const handleRemoveField = useCallback(() => {
+        Modal.confirm({
+            title: 'Удаление поля',
+            content: 'Вы уверены что хотите удалить поле?',
+            onOk: () => {
+                onRemoveField(fieldId);
+                message.success('Поле удалено');
+            },
+            okText: 'Удалить',
+            okButtonProps: {
+                danger: true,
+            },
+            cancelText: 'Отменить',
+        });
+
+    }, [onRemoveField, fieldId]);
+    
+
     return (
         <Space className={styles.fieldContainer}>
             <span>{fieldId}: &#123;</span>
@@ -58,7 +76,7 @@ const FieldManager = memo(({ fieldId, inputs, onAddInput, allFields, onRemoveFie
             <Button
                 className={styles.removeButton}
                 icon={<DeleteOutlined />}
-                onClick={() => onRemoveField(fieldId)}
+                onClick={handleRemoveField}
                 size="small"
                 danger
             />
@@ -120,8 +138,7 @@ const IncidenceInput = ({ onDataChange}) => {
 
     const saveData = useCallback(() => {
         if (Object.keys(fields).length === 0) {
-            console.error('Необходимо ввести данные');
-            alert('Необходимо ввести данные');
+            message.error('Необходимо ввести данные');
             return;
         }
 
@@ -142,8 +159,10 @@ const IncidenceInput = ({ onDataChange}) => {
             try {
                 const data = JSON.parse(e.target.result);
                 setFields(data);
+                message.success('Данные успешно загружены');
             } catch (error) {
                 console.error('Некорректный формат файла', error);
+                message.error('Некорректный формат файла');
             }
         }
 
