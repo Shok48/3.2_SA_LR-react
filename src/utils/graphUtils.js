@@ -140,3 +140,55 @@ export const topologicalDecomposition = ({nodes, edges}) => {
 
     return Sub;
 }
+
+// export const topologicalDecomposition = ({nodes, edges}) => {
+//     const notUsedV = new Set(nodes);
+//     const Sub = [];
+//     const subsystemEdges = [];
+
+//     while (notUsedV.size > 0) {
+//         const R = [];
+//         const Q = [];
+//         const visited = [];
+
+//         for (const notUsedNode of notUsedV) {
+//             for (const node of nodes) visited.push(!notUsedV.has(node));
+//             if (DFS([...notUsedV][0], notUsedNode, edges, visited)) R.push(notUsedNode);
+//             for (const node of nodes) visited[node] = !notUsedV.has(node);
+//             if (DFS(notUsedNode, [...notUsedV][0], edges, visited)) Q.push(notUsedNode);
+//         }
+
+//         const intersection = R.filter(node => Q.includes(node));
+//         Sub.push(intersection);
+//         intersection.forEach(node => {
+//             notUsedV.delete(node);
+//         });
+//     }
+
+//     // Теперь находим рёбра между подсистемами
+//     for (let i = 0; i < Sub.length; i++) {
+//         for (let j = i + 1; j < Sub.length; j++) {
+//             const edgesBetween = edges.filter(edge => {
+//                 const sourceInI = Sub[i].includes(edge.source);
+//                 const targetInJ = Sub[j].includes(edge.target);
+//                 const sourceInJ = Sub[j].includes(edge.source);
+//                 const targetInI = Sub[i].includes(edge.target);
+                
+//                 return (sourceInI && targetInJ) || (sourceInJ && targetInI);
+//             });
+            
+//             if (edgesBetween.length > 0) {
+//                 subsystemEdges.push({
+//                     source: i + 1,
+//                     target: j + 1,
+//                     edges: edgesBetween
+//                 });
+//             }
+//         }
+//     }
+
+//     return {
+//         subsystems: Sub,
+//         interSubsystemEdges: subsystemEdges
+//     };
+// }
